@@ -12,6 +12,6 @@ export async function GET(request) {
     return NextResponse.json({ success:true, products })
 
     } catch (error) {
-        return NextResponse.json({ success: false, error:message.error})
+        return NextResponse.json({ success: false, error:error.message})
     }
 }

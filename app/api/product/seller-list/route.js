@@ -7,10 +7,9 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request) { 
     try {
+    const { userId } = await getAuth(request)
+    const isSeller = await authSeller(userId)
 
-    const { userId } = getAuth(request)
-
-    const isSeller = authSeller (userId)
     if (!isSeller) {
         return NextResponse.json({ success: false, message: 'not authorized' });
     }
@@ -20,6 +19,6 @@ export async function GET(request) {
     return NextResponse.json({ success:true, products })
 
     } catch (error) {
-        return NextResponse.json({ success: false, error:message.error})
+        return NextResponse.json({ success: false, error:error.message})
     }
 }
